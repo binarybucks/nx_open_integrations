@@ -8,6 +8,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # This is the deb file used to install mediaserver
 ARG mediaserver_deb
+ENV deb=${mediaserver_deb}
 
 # Make a location to copy in the deb filee
 RUN mkdir /debs
@@ -17,7 +18,7 @@ COPY "${mediaserver_deb}" /debs/
 
 # Install the mediaserver and give user permissions for root-tool
 RUN apt-get update \
-    && apt-get install -y \/debs/${mediaserver_deb} sudo \
+    && apt-get install -y \/debs/${deb} sudo \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/ \
     && echo "${customization} ALL = NOPASSWD: /opt/${customization}/mediaserver/bin/entrypoint.sh, /opt/${customization}/mediaserver/bin/root-tool-bin" > /etc/sudoers.d/${customization} 
