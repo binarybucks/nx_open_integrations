@@ -26,6 +26,9 @@ RUN apt-get update \
 # Move the entrypoint script into the container
 COPY entrypoint.sh /opt/${customization}/mediaserver/bin/
 
+# Make entrypoint script executable 
+RUN chmod +x /opt/${customization}/mediaserver/bin/entrypoint.sh
+
 # Set the user to run the commands to the networkoptix user created on installation
 USER ${customization}
 
