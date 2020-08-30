@@ -14,6 +14,9 @@ display_usage() {
 	echo -e " -v|--verbose - enables verbose mode. It will mirror all commands to stdout"
 }
 
+# Set sane bash options
+set -euf -o pipefail
+
 # Path to a folder with Dockerfile and necessary scripts.
 DOCKER_SOURCE=`pwd`
 DOCKERFILE="${DOCKER_SOURCE}/Dockerfile"
@@ -25,11 +28,8 @@ DOCKER_BUILD_DIRECTORY=$(pwd)
 # Name of docker container to be built.
 CONTAINER_NAME=mediaserver
 CLOUD_HOST_OVERRIDE=""
-POSITIONAL=()
+POSITIONAL=("")
 ECHO_OUTPUT=false
-
-# Stops the script on error.
-set -e
 
 # Processing command line arguments.
 while [[ $# -gt 0 ]]
