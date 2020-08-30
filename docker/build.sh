@@ -1,4 +1,6 @@
 #!/bin/bash
+set -euf -o pipefail # Set sane bash defaults
+
 # Copyright 2018-present Network Optix, Inc. Licensed under MPL 2.0: www.mozilla.org/MPL/2.0/
 
 # This is helper script for building docker image from debian package for mediaserver
@@ -25,11 +27,8 @@ DOCKER_BUILD_DIRECTORY=$(pwd)
 # Name of docker container to be built.
 CONTAINER_NAME=mediaserver
 CLOUD_HOST_OVERRIDE=""
-POSITIONAL=()
+POSITIONAL=("")
 ECHO_OUTPUT=false
-
-# Stops the script on error.
-set -e
 
 # Processing command line arguments.
 while [[ $# -gt 0 ]]
