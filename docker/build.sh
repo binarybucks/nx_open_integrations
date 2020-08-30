@@ -149,11 +149,11 @@ else
 		then
 			# Grab the customization from production urls
 			re="(http.?:\/{2}updates\..*\.com\/)([^\/]*)"
-			[[ $DEB_URL =~ $re ]] && CUSTOMIZATION=${BASH_REMATCH[2]}
+			[[ $DEB_URL =~ $re ]] && [ -z "$CUSTOMIZATION" ] && CUSTOMIZATION=${BASH_REMATCH[2]}
 
 			# Grab the customization from beta urls
 			re="(http.?:\/{2}beta\..*\.com\/)(beta-builds\/)([^\/]*)"
-			[[ $DEB_URL =~ $re ]] && CUSTOMIZATION=${BASH_REMATCH[3]}
+			[[ $DEB_URL =~ $re ]] && [ -z "$CUSTOMIZATION" ] && CUSTOMIZATION=${BASH_REMATCH[3]}
 
 			echo -e "I will try to download mediaserver deb from ${SS}${DEB_URL}${EE}"
 			curl -o mediaserver.deb $DEB_URL 1>/dev/null || raise_error "Failed to download from ${SS}$DEB_URL${EE}"
